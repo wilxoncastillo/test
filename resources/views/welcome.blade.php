@@ -89,7 +89,9 @@
      @foreach($data as $items)
         <ul>
             <li>
-                {{ $items->categoria_id }}
+                <p>
+                Categoria: {{ $items->categoria_id }} Monto: {{ $items->total }} 
+                </p>
             </li>    
         </ul>
     @endforeach
