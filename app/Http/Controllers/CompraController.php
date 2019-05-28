@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\{Compra, DetalleCompra};
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
 {
@@ -16,9 +16,17 @@ class CompraController extends Controller
     public function index()
     {
         $compras = Compra::all();
+        $detalles = DetalleCompra::all();
+        
+        $data = DB::table('detalle_compras')
+                 ->select('categoria_id', DB::raw('sum(precio) as total'))
+                 ->groupBy('categoria_id')
+                 ->get();  
 
         return view('welcome', [
             'compras' => $compras,
+            'detalles' => $detalles,
+            'data' => $data,
         ]);
     }
 
@@ -87,4 +95,9 @@ class CompraController extends Controller
     {
         //
     }
+
+    public function categoria($id) {
+        return Categoria::find($id);
+    }
+
 }

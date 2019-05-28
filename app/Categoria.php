@@ -10,4 +10,6 @@ class Categoria extends Model
     {
         return $this->hasOne(DetalleCompra::class);
     }
+
+    
 }

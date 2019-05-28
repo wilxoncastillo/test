@@ -64,21 +64,35 @@
         </style>
     </head>
     <body>
-        <h3>Test de Prueba</h3>
-        @foreach($compras as $compra)
-            <ul>
-                <li>
-                    <p>Id:{{ $compra->id }}  Cantidad: {{ $compra->cantidad}}  Producto: {{ $compra->id }}</p>
-                    <p>Detalle de la Compra</p>
-                    <ul>
-                        <li>
-                            <p>Id: {{ $compra->detalle->id }} Nombre: {{ $compra->detalle->nombre }} Precio: {{ $compra->detalle->precio }}</p>
-                        </li>
-                    </ul>    
-                </li>
-                        
-            </ul>
-        @endforeach
+    <h3>Test de Prueba</h3>
+    <h5>Parte A Compras</h5>
+    @foreach($compras as $compra)
+        <ul>
+            <li>
+                <p>Id:{{ $compra->id }}  Cantidad: {{ $compra->cantidad}}  Producto: {{ $compra->producto }}</p>
+                <p><strong>Detalle de la Compra</strong></p>
+                <ul>
+                    <li>
+                        @foreach($detalles as $detalle)    
+                            @if($detalle->compra_id == $compra->id )
+                                <p>Id: {{ $detalle->id }} Nombre: {{ $detalle->nombre }} Precio: {{ $detalle->precio }}</p>
+                            @endif
+                        @endforeach                    
+                    </li>
+                </ul>    
+            </li>
+                    
+        </ul>
+    @endforeach
+
+    <h5>Parte B Sumatoria</h5>
+     @foreach($data as $items)
+        <ul>
+            <li>
+                {{ $items->categoria_id }}
+            </li>    
+        </ul>
+    @endforeach
 
     </body>
 </html>
