@@ -12,3 +12,5 @@
 */
 
 Route::resource('/','CompraController'); 
+
+Route::get('pelicula/genero/{genero}','PeliculaController@genero')->where(['genero' => 'Drama']); 
